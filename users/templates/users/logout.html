@@ -1,0 +1,15 @@
+{% extends 'resume_app/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Blog|ReLogin
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>You have been logout..</h2>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                <a href="{% url 'login' %}" class="ml-2">Log In Again</a>
+            </small>
+        </div>
+</div>
+{% endblock %}
