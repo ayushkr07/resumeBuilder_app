@@ -1,0 +1,53 @@
+{% extends 'resume_app/base.html' %}
+
+{% load crispy_forms_tags %}
+{% block title %}
+    Blog|New Post
+{% endblock %}
+{% block content %}
+    <h1 class="pl-4">Certificate and Accomplishment  <a class="btn btn-primary" href="{% url 'new_certificate_info' %}">Add</a></h1>
+
+    <hr>
+    <div class="border rounded p-4 m-4">
+        <p class="display-6">Your Skills</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>S no.</th>
+                    <th>Certificate Name</th>
+                    <th>Organization</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for l in lists %}
+                <tr>
+
+                    <td>{{forloop.counter}}</td>
+                    <td>{{l.certificate_title}}</td>
+                    <td>{{l.organization}}</td>
+                    <td>{{l.month}}</td>
+                    <td>{{l.year}}</td>
+                    <td><a class="btn btn-success" href="{% url 'update_certificate_info' pk=l.id %}">Update</a></td>
+                    <td><a class="btn btn-danger" href="{% url 'delete_certificate_info' pk=l.id %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+    </div>
+<div class="row p-4 b-4">
+    <div class="col-lg-5">
+        <a class="btn btn-secondary" style="display:inline-block;width:100%" href="{% url 'skill_list' %}">BACK</a>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+    <div class="col-lg-5">
+        <a class="btn btn-success" style="display:inline-block;width:100%" href="/">HOME PAGE</a>
+    </div>
+</div>
+{% endblock %}

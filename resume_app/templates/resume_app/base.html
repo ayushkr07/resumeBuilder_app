@@ -59,9 +59,27 @@
         </div>
       {% endfor %}
     {% endif %}
-</div>
-{% block content %}{% endblock %}
+    <div class="row my-2">
+        <div class="col-lg-2 mx-auto">
+            <div class="list-group">
+                <a href="/" class="list-group-item list-group-item-action">Home</a>
+                <a href="{% url 'new_personal_info' %}" class="list-group-item list-group-item-action">Personal Info</a>
+                <a href="{% url 'educational_list' %}" class="list-group-item list-group-item-action">Educational Info</a>
+                <a href="{% url 'employment_list' %}" class="list-group-item list-group-item-action">Employment History</a>
+                <a href="{% url 'project_list' %}" class="list-group-item list-group-item-action">Projects</a>
+                <a href="{% url 'skill_list' %}" class="list-group-item list-group-item-action">Skills</a>
+                <a href="{% url 'certificate_list' %}" class="list-group-item list-group-item-action">Certificates and Accomplishment</a>
 
+            </div>
+        </div>
+        <div class="col-lg-8">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+
+</div>
 
 <!--body-->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
