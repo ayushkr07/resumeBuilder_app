@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+<body>
+<div class="container p-2 b-3">
+    <div class="row pl-2">
+        <h1>{{user.personals.name}}</h1>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-lg-3">
+            <h5>Personal Info</h5>
+            <b>Phone :</b><br>
+            {{user.personals.phone}}<br>
+            <b>Email :</b><br>
+            {{user.personals.email}}<br>
+            <b>Address :</b><br>
+            {{user.personals.address}}<br>
+            <br>
+            <h5>Educations</h5>
+            {% for p in educations %}
+            <p>
+                <b>{{p.institution_name}}</b><br>
+                {{p.city}},{{p.state}}.<br>
+                {{p.degree}},{% if p.stream %}{{p.stream}},{% endif %}{{p.graduation_year}}- <b><i>{{p.percentage_or_cg}}</i></b><br>
+            </p>
+            {% endfor %}
+            <h5>Skills</h5>
+            {% for i in user.skills.all %}
+                {{forloop.counter}}. {{i.skill_name}}<br>
+            {% endfor %}
+        </div>
+        <div class="col-lg-9">
+            <h4>Professional Summary</h4>
+            <p>{{user.personals.intro}}</p>
+            {% if employments %}
+            <h4>Work Experience</h4>
+            {% for p in user.employments.all %}
+            <p>
+                <b>{{p.job_title}},{{p.employer}}. {{p.city}},{{p.state}}</b><br>
+                {{p.start_month}},{{p.start_year}}-{% if p.presently_working%}Present{% else %}{{p.end_month}},{{p.end_year}}{% endif %}<br>
+                {{p.description}}
+            </p>
+            {% endfor %}
+            {% endif %}
+            <h4>Projects</h4>
+            {% for p in user.projects.all %}
+            <p>
+                <b>{{p.project_title}}</b><br>
+                {% if p.project_link %}<b>Project Link : <i>{{p.project_link}}</i></b><br>{% endif %}
+                {% if p.project_code_link %}<b>Code Link : <i>{{p.project_code_link}}</i></b><br>{% endif %}
+                {{p.description}}
+            </p>
+            {% endfor %}
+            <h4>Certificate And Accomplishment</h4>
+            {% for p in user.certificates.all %}
+            <p>
+                <b>{{p.certificate_title}}</b><br>
+                {{p.organization}}-{{p.month}},{{p.year}}<br>
+                {{p.description}}
+            </p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -22,7 +22,7 @@ class EmploymentForm(forms.ModelForm):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model=Project
-        fields= ('project_title','description',)
+        fields= ('project_title','project_link','project_code_link','description',)
 
 class SkillForm(forms.ModelForm):
     class Meta:

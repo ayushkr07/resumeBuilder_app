@@ -1,18 +1,18 @@
 from django.db import models
 
 MONTHS_CHOICES = (
-    ('jan','JAN'),
-    ('feb', 'FEB'),
-    ('march','MARCH'),
-    ('april','APRIL'),
-    ('may','MAY'),
-    ('june','JUNE'),
-    ('july', 'JULY'),
-    ('aug','AUG'),
-    ('sep','SEP'),
-    ('oct','OCT'),
-    ('nov','NOV'),
-    ('dec','DEC'),
+    ('JAN','1'),
+    ('FEB', '2'),
+    ('MARCH','3'),
+    ('APRIL','4'),
+    ('MAY','5'),
+    ('JUNE','6'),
+    ('JULY', '7'),
+    ('AUG','8'),
+    ('SEP','9'),
+    ('OCT','10'),
+    ('NOV','11'),
+    ('DEC','12'),
 )
 YEAR_CHOICES = (
     ('2009','2009'),
@@ -65,7 +65,7 @@ class Employment(models.Model):
     description = models.TextField(blank=True,null=True)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
-    start_month = models.CharField(max_length=6, choices=MONTHS_CHOICES, default='may')
+    start_month = models.CharField(max_length=6, choices=MONTHS_CHOICES, default='MAY')
     start_year = models.CharField(max_length=6, choices=YEAR_CHOICES, default='2019')
     presently_working = models.BooleanField()
     end_month = models.CharField(max_length=6, choices=MONTHS_CHOICES, blank=True,null=True)
@@ -74,6 +74,8 @@ class Employment(models.Model):
 class Project(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='projects')
     project_title = models.CharField(max_length=100)
+    project_link = models.URLField(max_length=200,null=True,blank=True)
+    project_code_link = models.URLField(max_length=200,null=True,blank=True)
     description = models.TextField()
 
 class Skill(models.Model):
@@ -85,6 +87,6 @@ class Certificate(models.Model):
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='certificates')
     certificate_title = models.CharField(max_length=100,null=True,blank=True)
     organization = models.CharField(max_length=100)
-    month = models.CharField(max_length=6, choices=MONTHS_CHOICES, default='may')
+    month = models.CharField(max_length=6, choices=MONTHS_CHOICES, default='MAY')
     year = models.CharField(max_length=6, choices=YEAR_CHOICES, default='2019')
     description = models.TextField()

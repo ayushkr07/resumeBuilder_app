@@ -62,6 +62,7 @@
     <div class="row my-2">
         <div class="col-lg-2 mx-auto">
             <div class="list-group">
+                {% if user.is_authenticated %}
                 <a href="/" class="list-group-item list-group-item-action">Home</a>
                 <a href="{% url 'new_personal_info' %}" class="list-group-item list-group-item-action">Personal Info</a>
                 <a href="{% url 'educational_list' %}" class="list-group-item list-group-item-action">Educational Info</a>
@@ -69,7 +70,7 @@
                 <a href="{% url 'project_list' %}" class="list-group-item list-group-item-action">Projects</a>
                 <a href="{% url 'skill_list' %}" class="list-group-item list-group-item-action">Skills</a>
                 <a href="{% url 'certificate_list' %}" class="list-group-item list-group-item-action">Certificates and Accomplishment</a>
-
+                {% endif %}
             </div>
         </div>
         <div class="col-lg-8">
