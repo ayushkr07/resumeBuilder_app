@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .views import ViewPDF
 
 
 urlpatterns = [
@@ -26,7 +27,8 @@ urlpatterns = [
     path('update_certificate_info/<int:pk>', views.update_certificate_info, name='update_certificate_info'),
     path('delete_certificate_info/<int:pk>', views.delete_certificate_info, name='delete_certificate_info'),
 
-    path('cv/',views.cv,name='cv')
+    path('cv/',views.cv,name='cv'),
+    path('viewpdf/',ViewPDF.as_view(),name='viewpdf'),
 
 
 ]

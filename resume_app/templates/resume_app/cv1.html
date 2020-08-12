@@ -57,8 +57,8 @@
             {% for p in user.projects.all %}
             <p>
                 <b>{{p.project_title}}</b><br>
-                {% if p.project_link %}<b>Project Link : <i>{{p.project_link}}</i></b><br>{% endif %}
-                {% if p.project_code_link %}<b>Code Link : <i>{{p.project_code_link}}</i></b><br>{% endif %}
+                {% if p.project_link %}Project Link : <i>{{p.project_link}}</i><br>{% endif %}
+                {% if p.project_code_link %}Code Link : <i>{{p.project_code_link}}</i><br>{% endif %}
                 {{p.description}}
             </p>
             {% endfor %}

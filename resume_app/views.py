@@ -1,7 +1,14 @@
-from django.shortcuts import render,redirect,get_object_or_404,HttpResponse
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Personal,Education,Employment,Project,Skill,Certificate
 from .forms import PersonalForm,EducationForm,EmploymentForm,ProjectForm,SkillForm,CertificateForm
+
+from io import BytesIO
+from django.http import HttpResponse
+from django.template.loader import get_template
+from django.views import View
+from xhtml2pdf import pisa
+
 
 def index(requests):
     return render(requests,'resume_app/index.html')
@@ -236,3 +243,27 @@ def cv(request):
     employments = Employment.objects.filter(user=user).order_by('-start_year')
     certificates = Certificate.objects.filter(user=user).order_by('-year')
     return render(request,'resume_app/cv1.html',{'user':user,'educations':educations,'employments':employments,'certificates':certificates})
+
+
+def render_to_pdf(template_src, context_dict={}):
+    template = get_template(template_src)
+    html  = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")),result)
+    if not pdf.err:
+	    return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None
+
+
+class ViewPDF(View):
+
+    def get(self, request, *args, **kwargs):
+
+        user = request.user
+        educations = Education.objects.filter(user=user).order_by('-graduation_year')
+        employments = Employment.objects.filter(user=user).order_by('-start_year')
+        certificates = Certificate.objects.filter(user=user).order_by('-year')
+        pdf = render_to_pdf('resume_app/cv1.html',
+                    {'user': user, 'educations': educations, 'employments': employments, 'certificates': certificates})
+        return HttpResponse(pdf, content_type='application/pdf')
+
